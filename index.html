@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Smart Study Planner</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <!-- html2canvas & jsPDF from CDN (for PDF export) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
+</head>
+<body>
+  <!-- Side Banner (static legend) -->
+  <div class="side-banner">
+    <h3>📌 Urgency Guide</h3>
+    <p><span class="dot urgent-dot"></span> Urgent (≤ 3 days)</p>
+    <p><span class="dot soon-dot"></span> Soon (≤ 7 days)</p>
+    <p><span class="dot normal-dot"></span> Later (&gt; 7 days)</p>
+  </div>
+
+  <div class="container">
+    <header class="header">
+      <div>
+        <h1 class="title">📚 Smart Study Planner</h1>
+        <p class="subtitle">Plan your studies, track chapters, and stay exam-ready!</p>
+      </div>
+
+      <div class="header-actions">
+        <button id="darkToggle" class="toggle-btn" onclick="toggleDarkMode()">🌙</button>
+      </div>
+    </header>
+
+    <section class="card fade-in" id="controls">
+      <div class="row">
+        <label>
+          Class
+          <select id="classSelect" onchange="loadChapters()">
+            <option value="9">Class 9</option>
+            <option value="10">Class 10</option>
+          </select>
+        </label>
+
+        <label>
+          Subject
+          <select id="subjectSelect" onchange="loadChapters()">
+            <option value="math">Math</option>
+            <option value="science">Science</option>
+          </select>
+        </label>
+
+        <label>
+          Exam Date
+          <input id="examDate" type="date" />
+        </label>
+      </div>
+
+      <div id="chaptersContainer" class="chapters" aria-live="polite"></div>
+
+      <div class="actions">
+        <button class="btn-accent" onclick="addSubject()">➕ Add Subject</button>
+      </div>
+    </section>
+
+    <section class="card fade-in">
+      <h3>📌 Subjects Added</h3>
+      <ul id="subjectList" class="subject-list"></ul>
+    </section>
+
+    <div class="center">
+      <button id="generateBtn" class="generate-btn" onclick="generatePlan()">🚀 Generate Study Plan</button>
+    </div>
+
+    <section id="planCard" class="card fade-in">
+      <div class="plan-header">
+        <h3>Your Study Plan</h3>
+        <div class="plan-actions">
+          <button id="downloadPdfBtn" class="btn-accent small" onclick="exportPlanPDF()" disabled>📥 Download Plan as PDF</button>
+        </div>
+      </div>
+
+      <div id="plan" class="plan-content" aria-live="polite"></div>
+      <p class="quote" id="quote"></p>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

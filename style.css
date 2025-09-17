@@ -1,0 +1,202 @@
+/* ---------- Base / Layout ---------- */
+:root{
+  --accent1: #3498db;
+  --accent2: #9b59b6;
+  --green: #27ae60;
+  --urgent: rgba(255, 77, 77, 0.95);
+  --soon: rgba(255, 184, 77, 0.95);
+  --normal: rgba(102, 204, 102, 0.95);
+  --light-bg: rgba(255,255,255,0.85);
+  --dark-bg: rgba(25,25,30,0.92);
+  --dark-text: #f1f1f1;
+  --muted: rgba(0,0,0,0.55);
+  --glass-border: rgba(255,255,255,0.2);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  margin:0;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #3498db, #9b59b6);
+  color:#222;
+  transition: background 0.4s, color 0.4s;
+  min-height:100vh;
+  padding-left:240px; /* space for banner */
+}
+
+/* Side banner */
+.side-banner{
+  position:fixed;
+  left:20px;top:100px;
+  width:200px;
+  background:linear-gradient(135deg,#3498db,#9b59b6);
+  color:white;
+  padding:16px;
+  border-radius:16px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.25);
+  transform-origin:left center;
+  animation: slideIn 0.6s ease;
+}
+@keyframes slideIn {
+  from { transform: translateX(-20px); opacity:0 }
+  to { transform:none; opacity:1 }
+}
+.side-banner h3{margin:0 0 10px;font-weight:600}
+.side-banner p{margin:10px 0;display:flex;align-items:center;font-size:0.9rem}
+.dot{width:14px;height:14px;border-radius:50%;display:inline-block;margin-right:8px}
+.urgent-dot{background:#ff4d4d}.soon-dot{background:#ffb84d}.normal-dot{background:#66cc66}
+
+/* Container */
+.container{max-width:900px;margin:40px auto;padding:20px}
+
+/* Header */
+.header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.title{margin:0;color:white;text-shadow:0 3px 8px rgba(0,0,0,0.3);font-size:2rem}
+.subtitle{margin-top:4px;color:rgba(255,255,255,0.95)}
+.header-actions{display:flex;gap:10px;align-items:center}
+
+/* Toggle button */
+.toggle-btn{
+  border:none;
+  background:linear-gradient(135deg,#f39c12,#d35400);
+  color:white;padding:10px 14px;border-radius:50%;cursor:pointer;
+  font-size:1.2rem;
+  box-shadow:0 6px 16px rgba(0,0,0,0.18);
+  transition:transform 0.2s, opacity 0.2s;
+}
+.toggle-btn:hover{transform:scale(1.06)}
+
+/* Cards */
+.card{
+  background:var(--light-bg);
+  backdrop-filter:blur(10px);
+  border-radius:16px;
+  padding:18px;
+  margin:20px 0;
+  box-shadow:0 10px 30px rgba(0,0,0,0.12);
+  transition:transform 0.2s, background 0.3s, box-shadow 0.3s;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+.card:hover{transform:translateY(-3px)}
+
+/* Form controls */
+.row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+label{display:flex;flex-direction:column;font-size:0.9rem;font-weight:600}
+select,input[type="date"]{
+  padding:10px;border-radius:10px;border:1px solid #ddd;width:180px;background:white;
+  transition:box-shadow .2s, transform .12s;
+}
+select:focus,input:focus{outline:none;box-shadow:0 0 8px rgba(52,152,219,0.35);transform:translateY(-2px)}
+
+/* Chapters - improved checkboxes */
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapter-checkbox{
+  display:flex;gap:8px;align-items:center;
+  background:rgba(255,255,255,0.62);
+  padding:8px 12px;border-radius:10px;
+  font-size:0.9rem;cursor:pointer;
+  transition:transform 0.12s, box-shadow .12s, background .12s;
+  user-select:none;
+  border:1px solid rgba(0,0,0,0.06);
+}
+.chapter-checkbox input[type="checkbox"]{
+  width:18px;height:18px;cursor:pointer;
+  accent-color: #3498db;
+}
+.chapter-checkbox:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,0,0,0.08)}
+.chapter-checkbox.checked{
+  background: linear-gradient(90deg, rgba(52,152,219,0.14), rgba(155,89,182,0.08));
+  border:1px solid rgba(52,152,219,0.15);
+}
+
+/* Buttons */
+.btn-accent, .generate-btn{
+  border:none;
+  padding:12px 18px;
+  border-radius:12px;
+  cursor:pointer;
+  font-size:1rem;
+  font-weight:600;
+  transition:transform 0.2s, box-shadow 0.2s, opacity 0.15s;
+}
+.btn-accent{
+  background:linear-gradient(135deg,var(--accent1),var(--accent2));
+  color:white;
+}
+.btn-accent.small{padding:8px 12px;border-radius:10px;font-size:0.9rem;}
+.btn-accent[disabled], .generate-btn[disabled]{opacity:0.6;cursor:not-allowed}
+.btn-accent:hover:not([disabled]){transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,0.2)}
+.generate-btn{
+  background:linear-gradient(135deg,var(--green),#2ecc71);
+  color:white;
+  margin:12px 0;
+}
+.generate-btn:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,0.2)}
+
+/* Subject list */
+.subject-list{list-style:none;margin-top:10px}
+.subject-list li{
+  background:rgba(255,255,255,0.7);
+  margin:8px 0;padding:10px;
+  border-radius:10px;
+  display:flex;justify-content:space-between;align-items:center;
+  transition:transform .12s, box-shadow .12s;
+}
+.subject-list li:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,0,0,0.06)}
+.subject-list li button{
+  background:#e74c3c;color:white;border:none;padding:6px 10px;border-radius:8px;cursor:pointer;
+}
+
+/* Plan Table */
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;margin-top:12px}
+th,td{padding:10px;border:1px solid rgba(0,0,0,0.08);text-align:left}
+th{background:linear-gradient(90deg,var(--accent1),var(--accent2));color:white;position:sticky;top:0}
+.urgent{background:var(--urgent);color:white}
+.soon{background:var(--soon);color:#222}
+.normal{background:var(--normal);color:#222}
+
+/* Row animation (staggered) */
+.plan-row {
+  opacity:0;
+  transform: translateY(10px);
+  animation: rowIn 0.45s ease forwards;
+}
+@keyframes rowIn{
+  to { opacity:1; transform:none }
+}
+
+/* Quote */
+.quote{margin-top:14px;font-style:italic;color:#0b5345;text-align:center}
+
+/* Small UI */
+.center{text-align:center}
+.plan-header{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.plan-actions{display:flex;gap:8px;align-items:center}
+
+/* Loading pulse while creating PDF */
+.pulse {
+  display:inline-block;
+  width:12px;height:12px;border-radius:50%;
+  background:linear-gradient(90deg,#ffd166,#f39c12);
+  box-shadow:0 4px 14px rgba(243,156,18,0.25);
+  animation: pulse 1s infinite;
+  margin-left:8px;
+}
+@keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.35)}100%{transform:scale(1)}}
+
+/* Animations */
+.fade-in{animation:fadeIn .6s ease forwards}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* ---------- Dark Mode ---------- */
+body.dark-mode{
+  background:linear-gradient(135deg,#1a1a2e,#16213e);
+  color:var(--dark-text);
+}
+body.dark-mode .card{background:var(--dark-bg);color:var(--dark-text);border:1px solid rgba(255,255,255,0.03)}
+body.dark-mode select,body.dark-mode input{background:#222;color:var(--dark-text);border:1px solid #444}
+body.dark-mode .subject-list li{background:rgba(40,40,50,0.9)}
+body.dark-mode th{background:linear-gradient(90deg,#2980b9,#8e44ad)}
+body.dark-mode .quote{color:#d4efdf}
+body.dark-mode .chapter-checkbox{background:rgba(255,255,255,0.03);color:var(--dark-text);border:1px solid rgba(255,255,255,0.02)}
